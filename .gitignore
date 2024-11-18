@@ -1,0 +1,4 @@
+/data
+*.nii.gz
+*.xml
+*.iml
