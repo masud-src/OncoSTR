@@ -1,4 +1,6 @@
 # OncoSTR
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) 
+
 OncoSTR is a **str**uctural segmentation package for medical images that are distorted due to a **onco**logical disease.
 To perform the segmentation processes, the fast algorithm of fsl [1] is used. This algorithm builds on a k-means 
 clustering and compares probability-intensity gaussian functions of the different compartments. To take account of the
