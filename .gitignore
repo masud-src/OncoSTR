@@ -2,3 +2,6 @@
 *.nii.gz
 *.xml
 *.iml
+.idea
+/build
+/oncostr.egg-info

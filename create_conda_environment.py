@@ -44,7 +44,7 @@ def main():
     env_name = "oncofem"
     new_env_name = "oncostr"
     # Define each package with its specific channel
-    packages_with_channels = [("nibabel", "conda-forge"), ("fslpy", "conda-forge")]
+    packages_with_channels = [("nibabel", "conda-forge")]
 
     action = input(
         f"Would you like to (1) add packages to the existing environment '{env_name}' or (2) create a new environment '{new_env_name}'? Enter 1 or 2: ").strip()
