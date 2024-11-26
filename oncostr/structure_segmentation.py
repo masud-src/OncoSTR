@@ -14,6 +14,7 @@ from . import utils
 STRUCTURE_SEGMENTATION_PATH = "structure_segmentation" + os.path.sep
 MODES = ["tumor_agnostic", "bias_corrected", "tumor_entity_weighted"]
 
+
 class StructureSegmentation:
     """
     The StructureSegmentation class holds all options and functions for the segmentation of structural MRI modalities.
@@ -40,14 +41,14 @@ class StructureSegmentation:
         set_affine:                     Sets the affine from a given input image path
         split_tumor_from_brain:         Splits the tumor area from the brain area and saves the images
         segment_brain_part:             Segments only the healthy brain part
-        tumor_agnostic_mode:            Segmention by ignoring the distorted tumor area
-        bias_corrected_approach:        Segmentation according the bias corrected approach
-        tumor_entity_weighted_approach: Segmentation according the tumor entity weighted approach
+        tumor_agnostic:                 Segmentation by ignoring the distorted tumor area
+        bias_corrected:                 Segmentation according the bias corrected approach
+        tumor_entity_weighted:          Segmentation according the tumor entity weighted approach
         run:                            Runs the segmentation
     """
 
     def __init__(self, work_dir=None):
-        if work_dir==None:
+        if work_dir is None:
             work_dir = os.getcwd() + os.sep
         if not work_dir.endswith(os.sep):
             work_dir = work_dir + os.sep
@@ -64,13 +65,15 @@ class StructureSegmentation:
         """
         Set input files of structure segmentation.
 
-        :param input_files_dir: List, takes all structural input files gathered in a list. Should be in (t1, t1ce, t2, flair)
+        :param input_files_dir: List, takes all structural input files gathered in a list. Should be in (t1, t1ce, t2,
+        flair)
         :param tumor_seg_dir: tumor segmentation file. Corresponds to tumor segmentation file from tumor segmentation
         """
         self.input_files_dir = input_files_dir
         self.tumor_seg_dir = tumor_seg_dir
 
-    def list_modes(self) -> None:
+    @staticmethod
+    def list_modes() -> None:
         """
         List all implemented modes of structure segmentation.
 
@@ -127,7 +130,7 @@ class StructureSegmentation:
             brain_files.append(out_dir + file + "-woTumor.nii.gz")
 
         utils.single_segmentation(out_dir + "wms_Brain", brain_files,
-                                                  len(self.brain_handling_classes))
+                                  len(self.brain_handling_classes))
         for i, seg_class in enumerate(self.brain_handling_classes):
             os.rename(out_dir + "wms_Brain_pve_" + str(i) + ".nii.gz", out_dir + seg_class + ".nii.gz")
 

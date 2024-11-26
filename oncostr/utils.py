@@ -1,4 +1,3 @@
-
 import fsl.wrappers.fslmaths
 import fsl.wrappers.fast
 import numpy as np
@@ -18,6 +17,7 @@ def mkdir_if_not_exist(directory: str) -> str:
     if not os.path.exists(directory):
         os.makedirs(directory)
     return directory
+
 
 def set_out_dir(parent: str, child: str) -> str:
     """
@@ -64,7 +64,7 @@ def get_path_file_extension(input_file: str) -> tuple[str, str, str]:
 
 
 def cut_area_from_image(input_image: str, area_mask: nib.Nifti1Image,
-                            inverse: bool = False) -> Union[None, nib.Nifti1Image]:
+                        inverse: bool = False) -> Union[None, nib.Nifti1Image]:
     """
     Cuts an area of that image.
 
