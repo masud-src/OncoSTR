@@ -9,7 +9,7 @@ Class:
 import nibabel as nib
 import os
 import glob
-import utils
+from . import utils
 
 STRUCTURE_SEGMENTATION_PATH = "structure_segmentation" + os.path.sep
 MODES = ["tumor_agnostic", "bias_corrected", "tumor_entity_weighted"]
@@ -23,7 +23,6 @@ class StructureSegmentation:
 
     *Attributes*:
         work_dir:                   Directory of workspace, can be set as argument or actual workspace is set
-        out_dir:                    Name of the output directory, herein all files are saved.
         input_files_dir:            List of the input images. It is recommended to only use one image.
         affine:                     Variable for the image affine, every segmentation is mapped
         remove_interim_files:       Bool to remove the created interim files
@@ -53,7 +52,6 @@ class StructureSegmentation:
         if not work_dir.endswith(os.sep):
             work_dir = work_dir + os.sep
         self.work_dir = work_dir
-        self.out_dir = work_dir + STRUCTURE_SEGMENTATION_PATH
         self.input_files_dir = None
         self.tumor_seg_dir = None
         self.affine = None
@@ -99,6 +97,7 @@ class StructureSegmentation:
 
         :return:
         """
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
         seg_id = list(self.tumor_class_mapping.values())
         tumor_mask = utils.image2mask(self.tumor_seg_dir, seg_id[0], seg_id[1:])
         self.set_affine()
@@ -108,10 +107,10 @@ class StructureSegmentation:
             for b in [True, False]:
                 if b:
                     image = utils.cut_area_from_image(modality, image_tumor_mask, True)
-                    nib.save(image, self.out_dir + file + "-woTumor.nii.gz")
+                    nib.save(image, out_dir + file + "-woTumor.nii.gz")
                 else:
                     image = utils.cut_area_from_image(modality, image_tumor_mask, False)
-                    nib.save(image, self.out_dir + file + "-withTumor.nii.gz")
+                    nib.save(image, out_dir + file + "-withTumor.nii.gz")
 
     def segment_brain_part(self) -> None:
         """
@@ -121,15 +120,16 @@ class StructureSegmentation:
 
         :return: None
         """
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
         brain_files = []
         for modality in self.input_files_dir:
             _, _, file = utils.get_path_file_extension(modality)
-            brain_files.append(self.out_dir + file + "-woTumor.nii.gz")
+            brain_files.append(out_dir + file + "-woTumor.nii.gz")
 
-        utils.single_segmentation(self.out_dir + "wms_Brain", brain_files,
+        utils.single_segmentation(out_dir + "wms_Brain", brain_files,
                                                   len(self.brain_handling_classes))
         for i, seg_class in enumerate(self.brain_handling_classes):
-            os.rename(self.out_dir + "wms_Brain_pve_" + str(i) + ".nii.gz", self.out_dir + seg_class + ".nii.gz")
+            os.rename(out_dir + "wms_Brain_pve_" + str(i) + ".nii.gz", out_dir + seg_class + ".nii.gz")
 
     def tumor_agnostic(self) -> None:
         """
@@ -137,9 +137,10 @@ class StructureSegmentation:
 
         :return: None
         """
-        utils.single_segmentation(self.out_dir, self.input_files_dir, len(self.brain_handling_classes))
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        utils.single_segmentation(out_dir, self.input_files_dir, len(self.brain_handling_classes))
         for i, seg_class in enumerate(self.brain_handling_classes):
-            os.rename(self.out_dir + "_pve_" + str(i) + ".nii.gz", self.out_dir + seg_class + ".nii.gz")
+            os.rename(out_dir + "_pve_" + str(i) + ".nii.gz", out_dir + seg_class + ".nii.gz")
 
     def bias_corrected(self) -> None:
         """
@@ -147,6 +148,7 @@ class StructureSegmentation:
 
         :return: None
         """
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
         self.split_tumor_from_brain()
         self.segment_brain_part()
 
@@ -154,11 +156,11 @@ class StructureSegmentation:
         # just returns classification based on intensity
         for modality in self.input_files_dir:
             _, _, file = utils.get_path_file_extension(modality)
-            tumor_files.append(self.out_dir + os.sep + file + "-withTumor.nii.gz")
-        utils.single_segmentation(self.out_dir + os.sep + "tumor_class", tumor_files,
+            tumor_files.append(out_dir + os.sep + file + "-withTumor.nii.gz")
+        utils.single_segmentation(out_dir + os.sep + "tumor_class", tumor_files,
                                   len(list(self.tumor_class_mapping.keys())))
         for i, seg_class in enumerate(list(self.tumor_class_mapping.keys())):
-            os.rename(self.out_dir + "tumor_class_pve_" + str(i) + ".nii.gz", self.out_dir + seg_class + ".nii.gz")
+            os.rename(out_dir + "tumor_class_pve_" + str(i) + ".nii.gz", out_dir + seg_class + ".nii.gz")
 
     def tumor_entity_weighted(self) -> None:
         """
@@ -168,6 +170,7 @@ class StructureSegmentation:
 
         :return: None
         """
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
         self.split_tumor_from_brain()
         self.segment_brain_part()
         tumor_masks = {}
@@ -185,7 +188,7 @@ class StructureSegmentation:
                 array[array < 0] = -1
                 array = array + 1
                 image = nib.Nifti1Image(array, self.affine)
-                nib.save(image, self.out_dir + os.sep + str(key) + ".nii.gz")
+                nib.save(image, out_dir + os.sep + str(key) + ".nii.gz")
 
     def run(self) -> None:
         """
@@ -200,7 +203,8 @@ class StructureSegmentation:
         if (self.mode is MODES[1] or self.mode is MODES[2]) and self.tumor_seg_dir is None:
             raise ValueError(f"Error: For selected mode '{self.mode}' the tumor_seg_dir should not be None.")
 
-        utils.mkdir_if_not_exist(self.out_dir)
+        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        utils.mkdir_if_not_exist(out_dir)
 
         if self.mode == "tumor_agnostic":
             self.tumor_agnostic()
@@ -212,10 +216,10 @@ class StructureSegmentation:
             self.tumor_entity_weighted()
 
         if self.remove_interim_files:
-            files_to_remove = glob.glob(os.path.join(self.out_dir, '*Tumor.nii.gz'))
-            files_to_remove.extend(glob.glob(os.path.join(self.out_dir, '*mixeltype.nii.gz')))
-            files_to_remove.extend(glob.glob(os.path.join(self.out_dir, '*_pveseg.nii.gz')))
-            files_to_remove.extend(glob.glob(os.path.join(self.out_dir, '*_seg.nii.gz')))
+            files_to_remove = glob.glob(os.path.join(out_dir, '*Tumor.nii.gz'))
+            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*mixeltype.nii.gz')))
+            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_pveseg.nii.gz')))
+            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_seg.nii.gz')))
             for file_path in files_to_remove:
                 try:
                     os.remove(file_path)
