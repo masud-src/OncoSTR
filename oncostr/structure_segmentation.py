@@ -97,7 +97,7 @@ class StructureSegmentation:
 
         :return:
         """
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         seg_id = list(self.tumor_class_mapping.values())
         tumor_mask = utils.image2mask(self.tumor_seg_dir, seg_id[0], seg_id[1:])
         self.set_affine()
@@ -120,7 +120,7 @@ class StructureSegmentation:
 
         :return: None
         """
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         brain_files = []
         for modality in self.input_files_dir:
             _, _, file = utils.get_path_file_extension(modality)
@@ -137,7 +137,7 @@ class StructureSegmentation:
 
         :return: None
         """
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         utils.single_segmentation(out_dir, self.input_files_dir, len(self.brain_handling_classes))
         for i, seg_class in enumerate(self.brain_handling_classes):
             os.rename(out_dir + "_pve_" + str(i) + ".nii.gz", out_dir + seg_class + ".nii.gz")
@@ -148,7 +148,7 @@ class StructureSegmentation:
 
         :return: None
         """
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         self.split_tumor_from_brain()
         self.segment_brain_part()
 
@@ -170,7 +170,7 @@ class StructureSegmentation:
 
         :return: None
         """
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         self.split_tumor_from_brain()
         self.segment_brain_part()
         tumor_masks = {}
@@ -203,7 +203,7 @@ class StructureSegmentation:
         if (self.mode is MODES[1] or self.mode is MODES[2]) and self.tumor_seg_dir is None:
             raise ValueError(f"Error: For selected mode '{self.mode}' the tumor_seg_dir should not be None.")
 
-        out_dir = self.work_dir + STRUCTURE_SEGMENTATION_PATH
+        out_dir = utils.set_out_dir(self.work_dir, STRUCTURE_SEGMENTATION_PATH)
         utils.mkdir_if_not_exist(out_dir)
 
         if self.mode == "tumor_agnostic":

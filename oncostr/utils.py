@@ -19,6 +19,18 @@ def mkdir_if_not_exist(directory: str) -> str:
         os.makedirs(directory)
     return directory
 
+def set_out_dir(parent: str, child: str) -> str:
+    """
+    checks if parent path has separator at end and merges the paths.
+    
+    :param parent: String of parent directory 
+    :param child: String of child directory
+    :return: String of combined path
+    """
+    if not parent.endswith(os.sep):
+        parent = parent + os.sep
+    return parent + child
+
 
 def split_path(s: str) -> tuple[str, str]:
     """
