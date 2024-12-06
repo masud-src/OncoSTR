@@ -32,19 +32,19 @@ reduced to only the t1 image.
 
 ![alt text](tumor_entity_weighted_2.png)
 
-## Integration in Onco
-OncoSTR is part of **Onco**, a module based umbrella software for numerical 
-simulations of patient-specific cancer diseases, see following figure. From given input states of medical images the 
-disease is modelled and its evolution is simulated giving possible predictions. In this way, a digital cancer patient is 
-created, which could be used as a basis for further research, as a decision-making tool for doctors in diagnosis and 
-treatment and as an additional illustrative demonstrator for enabling patients understand their individual disease. 
-**Onco** is an open-access framework, that is ment to be an accelerator for the digital cancer patient. Each module can 
-be installed and run independently. The current state of development comprises the following modules
+## Integration of OncoSTR
+OncoSTR is part of a module based umbrella software for numerical simulations of patient-specific cancer diseases, see 
+the following figure. From given input states of medical images the disease is modelled and its evolution is simulated 
+giving possible predictions. In this way, a digital cancer patient is created, which could be used as a basis for 
+further research, as a decision-making tool for doctors in diagnosis and treatment and as an additional illustrative 
+demonstrator for enabling patients understand their individual disease. **OncoFEM** is an open-access framework, that is 
+ment to be an accelerator for the digital cancer patient. Each module can be installed and run independently. The 
+current state of development comprises the following modules
 
 - OncoFEM (https://github.com/masud-src/OncoFEM)
 - OncoGEN (https://github.com/masud-src/OncoGEN)
 - OncoTUM (https://github.com/masud-src/OncoTUM)
-- OncoSTR /https://github.com/masud-src/OncoSTR)
+- OncoSTR (https://github.com/masud-src/OncoSTR)
 
 ![alt text](workflow.png)
  
@@ -101,9 +101,11 @@ cd OncoSTR
 python3 create_conda_environment.py
 conda activate oncofem
 ````
-- Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred directory, ensure that oncostr environment is chosen.
+- Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred 
+directory, ensure that oncostr environment is chosen. With the minimal flag, only necessary packages will be installed.
 ````bash
-python3 fslinstaller.py
+curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
+python fslinstaller.py --minimal
 ````
 - Finally install oncostr on the local system.
 ````bash
@@ -120,9 +122,8 @@ TBD
 
 ## How To
 
-Of course, you can use your own segmentation algorithms and just use other packages of Onco, like OncoFEM. Or you can
-modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask for pull 
-requests.
+You can modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask 
+for pull requests.
 
 ## Literature
 
