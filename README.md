@@ -108,7 +108,7 @@ conda activate oncofem
   install in preferred directory, ensure that oncofem environment is activated.
 ````bash
 curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
-python fslinstaller.py --minimal
+python fslinstaller.py
 ````
 - Finally install oncostr on the local system.
 ````bash
