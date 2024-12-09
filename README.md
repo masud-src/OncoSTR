@@ -13,23 +13,21 @@ al. [2], but some exemplary results are shown in the following.
 The first image shows the tumor agnostic mode, where the images are simply segmented with fsl's fast algorithm, without
 any preparation.
 
-<img src="tumor_agnostic.png" alt="tumor_agnostic.png" width="200"/>
+<img src="tumor_agnostic.png" alt="tumor_agnostic.png" width="500"/>
 
 Since both presented approaches cut the healthy brain area and segment it separately, the next image holds for both.
 
-<img src="brain_seg.png" alt="brain_seg.png" width="200"/>
+<img src="brain_seg.png" alt="brain_seg.png" width="500"/>
 
 The next image shows the *bias corrected* mode. In short, herein the tumour area is cut and and both (healthy and tumor)
 images are segmented with fsl's fast algorithm separately.
 
-<img src="bias_corrected.png" alt="bias_corrected.png" width="200"/>
+<img src="bias_corrected.png" alt="bias_corrected.png" width="500"/>
 
 Finally, the last images show the *tumor entity weighted* mode. Herein, the tumour area is again cut from the healthy
 brain tissue and it is taken advantage of the distinct compartments of the tumour. Therefore, it is separated again into
 the particular classes of the tumour segmentation (according to BraTS into edema, active and necrotic core). In this
 areas the gray scale of the image is normalised.
-
-
 
 ## Integration of OncoSTR
 OncoSTR is part of a module based umbrella software for numerical simulations of patient-specific cancer diseases, see 
@@ -45,7 +43,7 @@ and run independently. The current state of development comprises the following 
 - OncoTUM (https://github.com/masud-src/OncoTUM)
 - OncoSTR (https://github.com/masud-src/OncoSTR)
 
-<img src="workflow.png" alt="workflow.png" width="200"/>
+<img src="workflow.png" alt="workflow.png" width="800"/>
  
 ## Software availability
 
