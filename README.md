@@ -13,40 +13,39 @@ al. [2], but some exemplary results are shown in the following.
 The first image shows the tumor agnostic mode, where the images are simply segmented with fsl's fast algorithm, without
 any preparation.
 
-![alt text](tumor_agnostic.png)
+<img src="tumor_agnostic.png" alt="tumor_agnostic.png" width="200"/>
+
+Since both presented approaches cut the healthy brain area and segment it separately, the next image holds for both.
+
+<img src="brain_seg.png" alt="brain_seg.png" width="200"/>
 
 The next image shows the *bias corrected* mode. In short, herein the tumour area is cut and and both (healthy and tumor)
 images are segmented with fsl's fast algorithm separately.
 
-![alt text](bias_corrected.png)
+<img src="bias_corrected.png" alt="bias_corrected.png" width="200"/>
 
 Finally, the last images show the *tumor entity weighted* mode. Herein, the tumour area is again cut from the healthy
 brain tissue and it is taken advantage of the distinct compartments of the tumour. Therefore, it is separated again into
 the particular classes of the tumour segmentation (according to BraTS into edema, active and necrotic core). In this
 areas the gray scale of the image is normalised.
 
-![alt text](tumor_entity_weighted_1.png)
 
-The last image shows the result with a reduced set of input images, where the gold standard set (t1, t1gd, t2, flair) is
-reduced to only the t1 image.
 
-![alt text](tumor_entity_weighted_2.png)
-
-## Integration in Onco
-OncoSTR is part of **Onco**, a module based umbrella software for numerical 
-simulations of patient-specific cancer diseases, see following figure. From given input states of medical images the 
-disease is modelled and its evolution is simulated giving possible predictions. In this way, a digital cancer patient is 
-created, which could be used as a basis for further research, as a decision-making tool for doctors in diagnosis and 
-treatment and as an additional illustrative demonstrator for enabling patients understand their individual disease. 
-**Onco** is an open-access framework, that is ment to be an accelerator for the digital cancer patient. Each module can 
-be installed and run independently. The current state of development comprises the following modules
+## Integration of OncoSTR
+OncoSTR is part of a module based umbrella software for numerical simulations of patient-specific cancer diseases, see 
+following figure. From given input states of medical images the disease is modelled and its evolution is simulated 
+giving possible predictions. In this way, a digital cancer patient is created, which could be used as a basis for 
+further research, as a decision-making tool for doctors in diagnosis and treatment and as an additional illustrative 
+demonstrator for enabling patients understand their individual disease. All parts of the umbrella software resolve to an 
+open-access framework, that is ment to be an accelerator for the digital cancer patient. Each module can be installed 
+and run independently. The current state of development comprises the following modules
 
 - OncoFEM (https://github.com/masud-src/OncoFEM)
 - OncoGEN (https://github.com/masud-src/OncoGEN)
 - OncoTUM (https://github.com/masud-src/OncoTUM)
-- OncoSTR /https://github.com/masud-src/OncoSTR)
+- OncoSTR (https://github.com/masud-src/OncoSTR)
 
-![alt text](workflow.png)
+<img src="workflow.png" alt="workflow.png" width="200"/>
  
 ## Software availability
 
@@ -79,8 +78,9 @@ python3 create_conda_environment.py
 conda activate oncostr
 ````
 - Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred 
-directory, ensure that oncostr environment is chosen.
+directory, ensure that oncostr environment is activated.
 ````bash
+curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
 python3 fslinstaller.py
 ````
 - Finally install oncostr on the local system.
@@ -101,7 +101,8 @@ cd OncoSTR
 python3 create_conda_environment.py
 conda activate oncofem
 ````
-- Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred directory, ensure that oncostr environment is chosen.
+- Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred 
+directory, ensure that oncofem environment is activated.
 ````bash
 python3 fslinstaller.py
 ````
