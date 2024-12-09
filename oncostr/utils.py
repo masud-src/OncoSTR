@@ -1,3 +1,17 @@
+"""
+Definition of auxiliary utils functions.
+
+Functions:
+    mkdir_if_not_exist:         Creates a directory if that not exists
+    set_out_dir:                Checks if parent path has separator at end and merges the paths.
+    split_path:                 Splits Filepath into file and path.
+    get_path_file_extension:    Returns path, the filename and the filename without extension.
+    cut_area_from_image:        Cuts an area of that image.
+    image2array:                Takes a directory of an image and gives a numpy array.
+    image2mask:                 Gives deep copy of original image with selected compartments.
+    single_segmentation:        runs fast segmentation algorithm in default with variable input files.
+"""
+
 import fsl.wrappers.fslmaths
 import fsl.wrappers.fast
 import numpy as np
@@ -13,6 +27,8 @@ def mkdir_if_not_exist(directory: str) -> str:
     Makes directory if not exists and returns the string.
 
     :param directory: String
+
+    :return: String of the directory
     """
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -21,10 +37,11 @@ def mkdir_if_not_exist(directory: str) -> str:
 
 def set_out_dir(parent: str, child: str) -> str:
     """
-    checks if parent path has separator at end and merges the paths.
+    Checks if parent path has separator at end and merges the paths.
     
     :param parent: String of parent directory 
     :param child: String of child directory
+
     :return: String of combined path
     """
     if not parent.endswith(os.sep):
@@ -36,11 +53,9 @@ def split_path(s: str) -> tuple[str, str]:
     """
     Splits Filepath into file and path
 
-    *Arguments:*
-        s: String
+    :param s: String
 
-    *Example:*
-        file, path = splitPath(s)
+    :return: (file, path)
     """
     import os
     f = os.path.basename(s)
@@ -52,11 +67,9 @@ def get_path_file_extension(input_file: str) -> tuple[str, str, str]:
     """
     Returns path, the filename and the filename without extension.
 
-    *Arguments:*
-        input_file: String
+    :param input_file: Input path
 
-    *Example:*
-        path, file, file_wo_extension = get_path_file_extension(input_file)
+    :return: (path, filename, file without extension)
     """
     file, path = split_path(input_file)
     file_wo_extension = Path(Path(input_file).stem).stem

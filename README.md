@@ -104,7 +104,8 @@ conda activate oncofem
 - Download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and install in preferred 
 directory, ensure that oncofem environment is activated.
 ````bash
-python3 fslinstaller.py
+curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
+python fslinstaller.py --minimal
 ````
 - Finally install oncostr on the local system.
 ````bash
@@ -121,9 +122,8 @@ TBD
 
 ## How To
 
-Of course, you can use your own segmentation algorithms and just use other packages of Onco, like OncoFEM. Or you can
-modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask for pull 
-requests.
+You can modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask 
+for pull requests.
 
 ## Literature
 

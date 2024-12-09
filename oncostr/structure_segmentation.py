@@ -34,11 +34,7 @@ class StructureSegmentation:
     Methods
         set_input_structure_seg:        Sets the list of input files
         list_modes:                     prints all implemented modes
-        cut_area_from_image:            STATIC, cuts an area from an image
-        image2array:                    STATIC, transforms an image into an array
-        image2mask:                     STATIC, creates a mask from an image
-        single_segmentation:            STATIC, interface to fsl. Performs segmentation
-        set_affine:                     Sets the affine from a given input image path
+        set_affine:                     STATIC, sets affine and shape of first measure of included state.
         split_tumor_from_brain:         Splits the tumor area from the brain area and saves the images
         segment_brain_part:             Segments only the healthy brain part
         tumor_agnostic:                 Segmentation by ignoring the distorted tumor area
