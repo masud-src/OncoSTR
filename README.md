@@ -55,7 +55,7 @@ The current state of development comprises the following modules
 You can either follow the installation instruction below or use the already pre-installed virtual boxes via the 
 following Links:
 
-- Version 1.0:  https://doi.org/10.18419/darus-3720
+- Version 0.1.0:  https://doi.org/10.18419/darus-3720
 
 ## Installation and Machine Requirements
 
@@ -125,10 +125,23 @@ There is an tutorial for the umbrella software project provided on DaRUS
 (https://darus.uni-stuttgart.de/dataset.xhtml?persistentId=doi:10.18419/darus-3679). You can download and run the
 tutorial_structure_segmentation.py file by run the following lines in your desired directory.
 ````bash
-curl --output tutorial.zip https:/darus.uni-stuttgart.de/api/access/dataset/:persistentId/?persistentId=doi:10.18419/darus-3679
-unzip tutorial.zip
-tar -xvzf tutorial.tar.gz
-rm tutorial.tar.gz tutorial.zip
+curl --output tutorial https:/darus.uni-stuttgart.de/api/access/dataset/:persistentId/?persistentId=doi:10.18419/darus-3679
+````
+To run this tutorial, you also need to download the first training dataset from kaggle 
+(https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation). Either you download from the web
+interface and save it in the following location
+````bash
+tutorial/data/BraTS/BraTS20_Training_001
+````
+or you use the kaggle API. Be aware that this will download the full set and its recommended to use the web interface
+````bash
+kaggle datasets download -d awsaf49/brats20-dataset-training-validation -p .
+unzip brats20-dataset-training-validation.zip "BraTS20_Training_001/*"  -d ./tutorial/data/BraTS/
+````
+The tutorial can be started with
+````bash
+conda activate oncostr
+python oncostr_tut_01_modes.py
 ````
 
 ## How To
