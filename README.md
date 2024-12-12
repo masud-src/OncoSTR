@@ -8,7 +8,20 @@ distorted area, two different approaches are presented. For this purpose, a prev
 used and the identified areas are treated separately. The exact procedure is explained in more detail in Suditsch et 
 al. [2], but some exemplary results are shown in the following.
 
-## Examplary results
+* [Exemplary results](#examplary-results)
+* [Integration of OncoFEM](#integration)
+* [Software availability](#software)
+* [Installation and machine requirements](#installation)
+  * [Stand-alone installation](#stand-alone-installation)
+  * [Install on existing OncoFEM environment](#OncoFEMenvironment)
+* [Tutorial](#tutorial)
+* [How to](#howto)
+    * [Implement a base model](#basemodel)
+    * [Implement a process model](#processmodel)
+* [How to cite](#howtocite)
+* [Literature](#literature)
+
+## <a id="examplary-results"></a> Exemplary results
 
 The first image shows the tumor agnostic mode, where the images are simply segmented with fsl's fast algorithm, without
 any preparation.
@@ -33,7 +46,7 @@ areas the gray scale of the image is normalised.
  <img src="tumor_entity_weighted.png" alt="tumor_entity_weighted.png" width="500" align=center/>
 </p>
 
-## Integration of OncoSTR
+## <a id="integration"></a> Integration of OncoSTR
 OncoSTR is part of a module based umbrella software project for numerical simulations of patient-specific cancer 
 diseases, see following figure. From given input states of medical images the disease is modelled and its evolution is 
 simulated giving possible predictions. In this way, a digital cancer patient is created, which could be used as a basis for 
@@ -50,21 +63,21 @@ The current state of development comprises the following modules
  <img src="workflow.png" alt="workflow.png" width="2000"/>
 </p>
 
-## Software availability
+## <a id="integration"></a> Integration of OncoFEM
 
 You can either follow the installation instruction below or use the already pre-installed virtual boxes via the 
 following Links:
 
 - Version 0.1.0:  https://doi.org/10.18419/darus-3720
 
-## Installation and Machine Requirements
+## <a id="installation"></a> Installation and Machine Requirements
 
 There are two different options the installation can be done. First, is the stand-alone installation, where OncoSTR is
 simply installed in an Anaconda environment. The other way is to install OncoFEM (https://github.com/masud-src/OncoFEM) 
 first and add the missing packets. This installation was tested on a virtual box created with a linux mint 21.2 
 cinnamon, 64 bit system and 8 GB RAM on a local machine (intel cpu i7-9700k with 3.6 GHz, 128 GB RAM).
 
-### Stand-alone installation
+### <a id="stand-alone-installation"></a> Stand-alone installation
 
 To ensure, the system is ready, it is first updated, upgraded and basic packages are installed via apt.
 ````bash
@@ -95,7 +108,7 @@ python3 -m pip install .
 import oncostr
 ````
 
-### Install on existing OncoFEM environment
+### <a id="OncoFEMenvironment"></a> Install on existing OncoFEM environment
 
 - Run the following command which adds packages to the existing Anaconda environment by pressing 1 in the system dialog.
 ````bash
@@ -119,10 +132,10 @@ python3 -m pip install .
 import oncostr
 ````
 
-## Tutorial
+## <a id="tutorial"></a> Tutorial
 
 There is an tutorial for the umbrella software project provided on DaRUS 
-(https://darus.uni-stuttgart.de/dataset.xhtml?persistentId=doi:10.18419/darus-3679). You can download and run the
+(https://darus.uni-stuttgart.de/dataset.xhtml?persistentId=doi:10.18419/darus-4639). You can download and run the
 tutorial_structure_segmentation.py file by run the following lines in your desired directory.
 ````bash
 curl --output tutorial https:/darus.uni-stuttgart.de/api/access/dataset/:persistentId/?persistentId=doi:10.18419/darus-3679
@@ -144,15 +157,16 @@ conda activate oncostr
 python oncostr_tut_01_modes.py
 ````
 
-## How To
+## <a id="howto"></a> How To
 
 You can modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask 
 for pull requests.
 
-## Literature
+## <a id="howtocite"></a> How to cite
+
+TBD
+
+## <a id="literature"></a> Literature
 
 <sup>1</sup> M. Jenkinson, C.F. Beckmann, T.E. Behrens, M.W. Woolrich, S.M. Smith. FSL. NeuroImage, 62:782-90, 2012
 
-## About
-
-OncoSTR is written by Marlon Suditsch
