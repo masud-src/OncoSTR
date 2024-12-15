@@ -13,9 +13,7 @@ al. [2], but some exemplary results are shown in the following.
 * [Software availability](#software)
 * [Installation and machine requirements](#installation)
 * [Tutorial](#tutorial)
-* [How to](#howto)
-    * [Implement a base model](#basemodel)
-    * [Implement a process model](#processmodel)
+* [How to develop](#howtodevelop)
 * [How to cite](#howtocite)
 * [Literature](#literature)
 
@@ -121,7 +119,7 @@ conda activate oncostr
 python oncostr_tut_01_modes.py
 ````
 
-## <a id="howto"></a> How to
+## <a id="howto"></a> How to develop
 
 You can modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask 
 for pull requests.
