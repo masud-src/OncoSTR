@@ -39,7 +39,17 @@ else
 fi
 
 python3 create_conda_environment.py
-conda activate oncostr
+echo "Choose the environment that shall be activated: (1) for OncoSTR, (2) for OncoFEM"
+read env_choice
+
+if [[ "$env_choice" == "1" ]]; then
+  conda activate oncostr
+elif [[ "$env_choice" == "2" ]]; then
+  conda activate oncofem
+else
+  echo "Invalid choice. Please choose either '1' for OncoSTR or '2' for OncoFEM."
+  exit 1
+fi
 cd ..
 curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
 python3 fslinstaller.py
