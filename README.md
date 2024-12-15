@@ -121,7 +121,7 @@ conda activate oncostr
 python oncostr_tut_01_modes.py
 ````
 
-## <a id="howto"></a> How To
+## <a id="howto"></a> How to
 
 You can modify the existing algorithms, respectively expand the existing by your own. Therefore, you can fork and ask 
 for pull requests.
