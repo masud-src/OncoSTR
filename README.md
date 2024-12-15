@@ -12,8 +12,6 @@ al. [2], but some exemplary results are shown in the following.
 * [Integration of OncoFEM](#integration)
 * [Software availability](#software)
 * [Installation and machine requirements](#installation)
-  * [Short installation](#short_install)
-  * [Detailed installation](#detailed_install)
 * [Tutorial](#tutorial)
 * [How to](#howto)
     * [Implement a base model](#basemodel)
@@ -79,8 +77,6 @@ perfomed. This installation was tested on
 local machine (intel cpu i7-9700k with 3.6 GHz, 128 GB RAM). 
 - a MacBook Pro (Mac14,7) with a Apple M2 Chip (8 cores) and 24 GB memory. The integrated GPU got 10 cores.
 
-### <a id="short_install"></a> Short installation
-
 The following script will download all maybe missing prerequisites and will install fsl on your system. Please be ready
 to go through an installation dialog. You will be asked if you want to install OncoSTR as stand-alone or in the OncoFEM
 environment and how the installation of fsl should be done. Please restart the terminal hereafter.
@@ -100,67 +96,6 @@ The package can now be used. To test the correct installation, run a python scri
 import oncostr
 ````
 
-### <a id="detailed_install"></a> Detailed installation
-To ensure, the system is ready, it is first updated, upgraded and basic packages are installed via apt. You can skip
-this for installation on existing OncoFEM environment
-````bash
-sudo apt update
-sudo apt upgrade
-sudo apt install build-essential python3-pip git
-````
-Anaconda needs to be installed. Go to https://anaconda.org/ and follow the installation instructions.
-```bash
-OS=$(uname -s)
-ARCH=$(uname -m)
-
-if [[ "$OS" == "Linux" ]]; then
-    OS="Linux"
-elif [[ "$OS" == "Darwin" ]]; then
-    OS="MacOSX"
-elif [[ "$OS" =~ MINGW64 || "$OS" =~ MSYS ]]; then
-    OS="Windows"
-else
-    echo "Unsupported OS: $OS"
-    exit 1
-fi
-
-if [[ "$OS" == "MacOSX" && "$ARCH" == "arm64" ]]; then
-    ARCH="arm64"
-elif [[ "$ARCH" == "x86_64" ]]; then
-    ARCH="x86_64"
-else
-    echo "Unsupported architecture: $ARCH"
-    exit 1
-fi
-URL="https://repo.anaconda.com/archive/Anaconda3-latest-$OS-$ARCH.sh"
-echo "Downloading Anaconda installer from: $URL"
-curl -o AnacondaInstaller.sh "$URL"
-bash Anaconda.sh -b -p $HOME/anaconda3
-eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
-conda init
-```
-Run the following command and chose whether you want to set up a stand-alone anaconda environment for oncostr or append
-the oncofem environment.
-````bash
-git clone https://github.com/masud-src/OncoSTR/
-cd OncoSTR
-python3 create_conda_environment.py
-conda activate oncostr
-````
-Run the following line or download the fsl package from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation and
-install in preferred directory, ensure that oncostr/oncofem environment is activated.
-````bash
-curl -O https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py
-python3 fslinstaller.py
-````
-Finally install OncoSTR on the local system.
-````bash
-python3 -m pip install .
-````
-The package can now be used. To test the correct installation, run a python script with the following code line.
-````bash
-import oncostr
-````
 ## <a id="tutorial"></a> Tutorial
 
 There is an tutorial for the umbrella software project provided on DaRUS 
