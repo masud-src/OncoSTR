@@ -85,6 +85,8 @@ The following script will download all maybe missing prerequisites and will inst
 to go through an installation dialog. You will be asked if you want to install OncoSTR as stand-alone or in the OncoFEM
 environment and how the installation of fsl should be done. Please restart the terminal hereafter.
 ````bash
+git clone https://github.com/masud-src/OncoSTR/
+cd OncoSTR
 chmod +x install_prerequisites.sh
 ./install_prerequisites.sh
 ````

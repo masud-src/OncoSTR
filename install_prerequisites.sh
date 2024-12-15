@@ -38,8 +38,6 @@ else
     exit 1
 fi
 
-git clone https://github.com/masud-src/OncoSTR/
-cd OncoSTR
 python3 create_conda_environment.py
 conda activate oncostr
 cd ..
