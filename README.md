@@ -86,7 +86,7 @@ chmod +x install_prerequisites.sh
 ````
 Now the installation of OncoSTR can be done with
 ````bash
-chmd +x install_oncostr
+chmod +x install_oncostr.sh
 ./install_oncostr.sh
 ````
 The package can now be used. To test the correct installation, run a python script with the following code line.
