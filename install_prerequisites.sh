@@ -39,15 +39,15 @@ else
 fi
 
 python3 create_conda_environment.py
-echo "Choose the environment that shall be activated: (1) for OncoSTR, (2) for OncoFEM"
+echo "Choose the environment that shall be activated: (1) for OncoFEM, (2) for OncoSTR"
 read env_choice
 
 if [[ "$env_choice" == "1" ]]; then
-  conda activate oncostr
-elif [[ "$env_choice" == "2" ]]; then
   conda activate oncofem
+elif [[ "$env_choice" == "2" ]]; then
+  conda activate oncostr
 else
-  echo "Invalid choice. Please choose either '1' for OncoSTR or '2' for OncoFEM."
+  echo "Invalid choice. Please choose either '1' for OncoFEM or '2' for OncoSTR."
   exit 1
 fi
 cd ..
