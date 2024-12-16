@@ -42,7 +42,8 @@ python3 create_conda_environment.py
 echo "Choose the environment that shall be activated: (1) for OncoFEM, (2) for OncoSTR"
 read env_choice
 
-if [[ "$env_choice" == "1" ]]; then
+elif [[ "$env_choice" == "1" ]]; then
+  conda init
   conda activate oncofem
 elif [[ "$env_choice" == "2" ]]; then
   conda activate oncostr
