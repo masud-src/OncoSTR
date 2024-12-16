@@ -43,8 +43,10 @@ echo "Choose the environment that shall be activated: (1) for OncoSTR, (2) for O
 read env_choice
 
 if [[ "$env_choice" == "1" ]]; then
+  conda init
   conda activate oncostr
 elif [[ "$env_choice" == "2" ]]; then
+  conda init
   conda activate oncofem
 else
   echo "Invalid choice. Please choose either '1' for OncoSTR or '2' for OncoFEM."
