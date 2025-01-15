@@ -117,13 +117,14 @@ def image2mask(image_dir: str, compartment: int, inner_compartments: list[int] =
     mask, _, _ = image2array(image_dir)
     unique = list(np.unique(mask))
     unique.remove(compartment)
-    for outer in unique:
-        mask[np.isclose(mask, outer)] = 0.0
     mask[np.isclose(mask, compartment)] = 1.0
     if inner_compartments is not None:
         for comp in inner_compartments:
             mask[np.isclose(mask, comp)] = 1.0
             unique.remove(comp)
+    for outer in unique:
+        mask[np.isclose(mask, outer)] = 0.0
+        unique.remove(outer)
     return mask
 
 
