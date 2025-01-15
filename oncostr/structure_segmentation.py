@@ -26,7 +26,7 @@ class StructureSegmentation:
         work_dir:                   Directory of workspace, can be set as argument or actual workspace is set
         input_files_dir:            List of the input images. It is recommended to only use one image.
         affine:                     Variable for the image affine, every segmentation is mapped
-        remove_interim_files:       Bool to remove the created interim files
+        bool_remove_interim_files:       Bool to remove the created interim files
         mode:                       Selected mode of segmentation
         brain_handling_classes:     List of brain compartment classes, it should be segmented to
         tumor_class_mapping:        Dict of tumor classes with a respective mapping according to brats segmentation
@@ -40,6 +40,7 @@ class StructureSegmentation:
         tumor_agnostic:                 Segmentation by ignoring the distorted tumor area
         bias_corrected:                 Segmentation according the bias corrected approach
         tumor_entity_weighted:          Segmentation according the tumor entity weighted approach
+        remove_interim_files:           Removes all interim files in a given directory
         run:                            Runs the segmentation
     """
 
@@ -52,7 +53,7 @@ class StructureSegmentation:
         self.input_files_dir = None
         self.tumor_seg_dir = None
         self.affine = None
-        self.remove_interim_files = True
+        self.bool_remove_interim_files = True
         self.mode = "bias_corrected"
         self.brain_handling_classes = ["cerebrospinal_fluid", "gray_matter", "white_matter"]
         self.tumor_class_mapping = {"edema": 2, "active": 4, "necrotic": 1}
@@ -238,5 +239,5 @@ class StructureSegmentation:
         if self.mode == "tumor_entity_weighted":
             self.tumor_entity_weighted()
 
-        if self.remove_interim_files:
+        if self.bool_remove_interim_files:
             self.remove_interim_files(out_dir)
