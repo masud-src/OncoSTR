@@ -194,6 +194,25 @@ class StructureSegmentation:
                 image = nib.Nifti1Image(array, self.affine)
                 nib.save(image, out_dir + os.sep + str(key) + ".nii.gz")
 
+    def remove_interim_files(self, out_dir: str) -> None:
+        """
+        Removes all interim files in a chosen path.
+
+        :param out_dir: chosen path
+
+        :return: None
+        """
+        files_to_remove = glob.glob(os.path.join(out_dir, '*Tumor.nii.gz'))
+        files_to_remove.extend(glob.glob(os.path.join(out_dir, '*mixeltype.nii.gz')))
+        files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_pveseg.nii.gz')))
+        files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_seg.nii.gz')))
+        for file_path in files_to_remove:
+            try:
+                os.remove(file_path)
+                print(f"Removed: {file_path}")
+            except Exception as e:
+                print(f"Error removing {file_path}: {e}")
+
     def run(self) -> None:
         """
         Performs the structure segmentation with the given input files and selected mode. Creates a folder with output
@@ -220,13 +239,4 @@ class StructureSegmentation:
             self.tumor_entity_weighted()
 
         if self.remove_interim_files:
-            files_to_remove = glob.glob(os.path.join(out_dir, '*Tumor.nii.gz'))
-            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*mixeltype.nii.gz')))
-            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_pveseg.nii.gz')))
-            files_to_remove.extend(glob.glob(os.path.join(out_dir, '*_seg.nii.gz')))
-            for file_path in files_to_remove:
-                try:
-                    os.remove(file_path)
-                    print(f"Removed: {file_path}")
-                except Exception as e:
-                    print(f"Error removing {file_path}: {e}")
+            self.remove_interim_files(out_dir)
