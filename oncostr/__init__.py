@@ -6,4 +6,4 @@ Modules:
     structure_segmentation: Its the control file for all functionalities for the user.
     utils                 : Herein, helper functions are hold, in order to keep the other file clean for the user.
 """
-from .structure_segmentation import StructureSegmentation
+from .structure_segmentation import StructureSegmentation, STRUCTURE_SEGMENTATION_PATH, MODES
