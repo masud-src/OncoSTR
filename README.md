@@ -126,7 +126,7 @@ for pull requests.
 
 ## <a id="howtocite"></a> How to cite
 
-If you are using using OncoFEM please also cite the related publication
+If you are using using OncoSTR please also cite the related publication
 
 **Onco*: An umbrella Python framework for modelling and simulation of oncological scenarios**. Marlon Suditsch, Arndt Wagner, Tim Ricken, Journal of Computational Science (2025). [10.1016/j.jocs.2025.102533](https://doi.org/10.1016/j.jocs.2025.102533)
 ```bib
